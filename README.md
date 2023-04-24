@@ -16,7 +16,7 @@ $ nix build '.#nixosConfigurations.sdcard.config.system.build.sdImage'
 ## Flashing the image
 
 ```
-zstdcat result/sd-image/nixos-sd-image-23.05.20230421.2362848-aarch64-linux.img.zst  | sudo dd of=/dev/sdc bs=8M oflag=direct status=progress iflag=fullblock
+$ zstdcat result/sd-image/nixos-sd-image-23.05.20230421.2362848-aarch64-linux.img.zst  | sudo dd of=/dev/sdc bs=8M oflag=direct status=progress iflag=fullblock
 
 ```
 
@@ -25,3 +25,7 @@ zstdcat result/sd-image/nixos-sd-image-23.05.20230421.2362848-aarch64-linux.img.
 ```
 $ nixos-rebuild switch --flake '.#'
 ```
+
+## TODO
+
+- [ ] move `klipper_config` (back) to own repository / submodule to track [upstream](https://github.com/9R/Klipper_KP3S) [changes](https://github.com/nehilo/Klipper-KingRoon-Printers).
