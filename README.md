@@ -13,6 +13,8 @@ Builds an SD-card image and allows `nixos-rebuild switch` on the device all with
 $ nix build '.#nixosConfigurations.sdcard.config.system.build.sdImage'
 ```
 
+This assumes that your host machine is either aarch64 or you have [configured binfmt / qemu](https://nixos.wiki/wiki/NixOS_on_ARM#Compiling_through_binfmt_QEMU), both resulting in it being able to build + run aarch64 binaries.
+
 ## Flashing the image
 
 ```
