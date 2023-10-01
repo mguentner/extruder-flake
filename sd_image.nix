@@ -6,6 +6,8 @@
 
   sdImage = {
     # usage is around 70 MiB
-    firmwareSize = 150;
+    # allow for rebuilds with new kernels
+    firmwareSize = 500;
+    compressImage = false;
   };
 }

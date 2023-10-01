@@ -170,14 +170,36 @@ in
 
   users.users = {
     nixos = {
-      initialHashedPassword = lib.mkDefault secrets.users.nixos.initialHashedPasswords;
+      initialHashedPassword = lib.mkDefault secrets.users.nixos.initialHashedPassword;
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" "video" ];
       openssh.authorizedKeys.keys = lib.mkDefault secrets.users.nixos.opensshKeys;
     };
     root = {
-      initialHashedPassword = lib.mkDefault secrets.users.root.initialHashedPasswords;
+      initialHashedPassword = lib.mkDefault secrets.users.root.initialHashedPassword;
     };
+    hass = {
+      isNormalUser = true;
+      initialHashedPassword = lib.mkDefault secrets.users.hass.initialHashedPassword;
+      openssh.authorizedKeys.keys = lib.mkDefault secrets.users.hass.opensshKeys; 
+    };
+  };
+
+  security.sudo = {
+    enable = true;
+    extraRules = [{
+      commands = [
+        {
+          command = "${pkgs.systemd}/bin/reboot";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/poweroff";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+      users = [ "hass" ];
+    }];
   };
 
   system.stateVersion = "23.05"; # Did you read the comment?
