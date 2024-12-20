@@ -19,7 +19,7 @@ in
   };
 
   fileSystems = {
-    "/boot" = {
+    "/firmware" = {
       device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
       options = [ "defaults" ];
